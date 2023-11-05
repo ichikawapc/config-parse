@@ -1,3 +1,4 @@
+![CI Workflow](https://github.com/ichikawapc/config-parse/actions/workflows/scala.yml/badge.svg)
 # config-parse
 
 特定のルールに沿って書かれたテキストファイルを解析してCSVにするツールです
