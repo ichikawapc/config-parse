@@ -1,0 +1,32 @@
+agent-addresses,communities,disk-monitors,process-monitors
+tcp6:161 udp6:161,"/Common/comm-public {
+    community-name public
+    source default
+}","/Common/root {
+    minspace 2000
+    path /
+}
+/Common/var {
+    minspace 10000
+    path /var
+}","/Common/bigd {
+    max-processes infinity
+    process bigd
+}
+/Common/chmand {
+    process chmand
+}
+/Common/httpd {
+    max-processes infinity
+    process httpd
+}
+/Common/mcpd {
+    process mcpd
+}
+/Common/sod {
+    process sod
+}
+/Common/tmm {
+    max-processes infinity
+    process tmm
+}"

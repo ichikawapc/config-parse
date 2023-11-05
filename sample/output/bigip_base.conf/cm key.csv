@@ -1,0 +1,3 @@
+name,cache-path,checksum,revision
+/Common/dtca.key,/config/filestore/files_d/Common_d/trust_certificate_key_d/:Common:dtca.key_36721_2,SHA1:1704:2aeb6303ece56c9e56ea03cca55792173acd5d94,2
+/Common/dtdi.key,/config/filestore/files_d/Common_d/trust_certificate_key_d/:Common:dtdi.key_36717_2,SHA1:1704:87ce6988c7639cba02c137f6d81aba0875f1e104,2
