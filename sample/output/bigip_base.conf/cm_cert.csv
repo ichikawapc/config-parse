@@ -1,0 +1,4 @@
+name,cache-path,checksum,revision
+/Common/dtca-bundle.crt,/config/filestore/files_d/Common_d/trust_certificate_d/:Common:dtca-bundle.crt_36723_2,SHA1:1298:69628a6f1d776d26fddf17c6b01294bc425e982b,2
+/Common/dtca.crt,/config/filestore/files_d/Common_d/trust_certificate_d/:Common:dtca.crt_36719_2,SHA1:1298:69628a6f1d776d26fddf17c6b01294bc425e982b,2
+/Common/dtdi.crt,/config/filestore/files_d/Common_d/trust_certificate_d/:Common:dtdi.crt_36715_2,SHA1:1265:fd3ce5305da24f673d8531c5e1b9d5cd1c65025e,2

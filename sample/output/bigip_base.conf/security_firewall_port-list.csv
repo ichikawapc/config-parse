@@ -1,0 +1,12 @@
+name,ports
+/Common/_sys_self_allow_tcp_defaults,"22 { }
+53 { }
+161 { }
+443 { }
+1029-1043 { }
+4353 { }"
+/Common/_sys_self_allow_udp_defaults,"53 { }
+161 { }
+520 { }
+1026 { }
+4353 { }"

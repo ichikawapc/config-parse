@@ -1,0 +1,4 @@
+name,device-group,hidden,inherited-devicegroup,inherited-traffic-group,traffic-group
+/,none,false,false,false,/Common/traffic-group-1
+/Common,none,false,true,true,/Common/traffic-group-1
+/Common/Drafts,none,false,true,true,/Common/traffic-group-1

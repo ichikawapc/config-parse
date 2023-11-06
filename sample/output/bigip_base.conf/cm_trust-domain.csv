@@ -1,0 +1,2 @@
+name,ca-cert,ca-cert-bundle,ca-devices,ca-key,guid,status,trust-group
+/Common/Root,/Common/dtca.crt,/Common/dtca-bundle.crt,/Common/default.local,/Common/dtca.key,8b2bc050-37ad-401a-8c51000c29460034,standalone,/Common/device_trust_group

@@ -1,0 +1,3 @@
+name,auto-sync,devices,hidden,network-failover
+/Common/device_trust_group,enabled,/Common/default.local { },true,disabled
+/Common/gtm,,/Common/default.local { },true,disabled

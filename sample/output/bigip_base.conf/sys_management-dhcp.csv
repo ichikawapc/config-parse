@@ -1,0 +1,2 @@
+name,request-options
+/Common/sys-mgmt-dhcp-config,subnet-mask broadcast-address routers domain-name domain-name-servers host-name ntp-servers
