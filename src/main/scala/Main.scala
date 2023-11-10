@@ -1,20 +1,6 @@
 /*　
 ●参考にしたサイト↓
 ファイルの出力：http://www.mwsoft.jp/programming/scala/fileread.html
-
-●やること↓
-#14 入力ファイルをコマンドライン引数から取得して、その行数を標準出力する
-入力ファイルをコマンドライン引数から取得して、その行数を標準出力する
-• main関数の中に書いてください
-• コマンドライン引数は main関数の引数の args です
-• scalaでは Source.fromFile("ファイル名") でFileからSourceというデータを取ることができます
-• Sourceの getLinesというメソッドでファイルの中身の全部の行をとることができます
-• length メソッドで長さを取ることができます
-• println(s"行数は $n 行だよ♪") で標準出力します
-確認方法
-sample.config というファイルが手元にあったとして、
-sbt "run sample.config"
-を実行して行数がでたら成功です。
  */
 
 
