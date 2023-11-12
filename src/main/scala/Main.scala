@@ -2,8 +2,6 @@
 ●参考にしたサイト↓
 ファイルの出力：http://www.mwsoft.jp/programming/scala/fileread.html
  */
-
-
 object Main {
   def main(args:Array[String]): Unit = {
     val input = "Hello World"
@@ -14,5 +12,5 @@ object Main {
     val lineLength = lines.length //length メソッドでlinesの長さを取る
     println(s"行数は $lineLength 行だよ♪")
     source.close
-}
+  }
 }
