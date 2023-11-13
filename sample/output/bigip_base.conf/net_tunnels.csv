@@ -1,0 +1,4 @@
+name,description,profile
+/Common/socks-tunnel,"Tunnel for socks profile",/Common/tcp-forward
+/Common/http-tunnel,"Tunnel for http-explicit profile",/Common/tcp-forward
+/Common/socks-tunnel,"Tunnel for socks profile",/Common/tcp-forward
