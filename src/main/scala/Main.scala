@@ -9,7 +9,7 @@ object Main {
     println(input)
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
-      println("使用例: sbt \"run sample/input/bigip.comf\"")
+      println("使用例: sbt \"run sample/input/bigip.conf\"")
     } else {
       val filename = args(0)  //コマンドラインからファイル名を取得
       val source = io.Source.fromFile(filename, "utf-8") //ファイルを文字コードUTF-8で出力
