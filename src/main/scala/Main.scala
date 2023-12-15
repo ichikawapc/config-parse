@@ -9,7 +9,14 @@ import scala.util.Try
 object Main {
   def main(args:Array[String]): Unit = {
     val input = "Hello World"
+    val inputData = List(
+      ("foo", Item("default", Map("report-name" -> "Summary"))),
+      ("bar", Item("monitor", Map("rule" -> "none"))),
+      ("foo", Item("report2", Map("report-name" -> "Common", "user" -> "admin")))
+    )
     println(input)
+    val outputData = Section.groupItems(inputData)
+    println(outputData)
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
       println("使用例: sbt \"run sample/input/bigip.conf\"")
