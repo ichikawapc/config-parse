@@ -14,6 +14,8 @@ object Main {
       ("bar", Item("monitor", Map("rule" -> "none"))),
       ("foo", Item("report2", Map("report-name" -> "Common", "user" -> "admin")))
     )
+    val testInput = "a bc defg"
+    println(Parser.run(testInput))
     println(input)
     val outputData = Section.groupItems(inputData)
     println(outputData)
