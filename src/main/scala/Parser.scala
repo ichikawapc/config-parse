@@ -8,11 +8,7 @@ import scala.util.matching.Regex
 
 object Parser extends RegexParsers {
   override def skipWhitespace = true
-
-  def name: Regex =  "[0-9a-zA-Z/:-_.,]".r
-
+  def name: Regex =  """[0-9a-zA-Z/:-_.,]+""".r
   def names: Parser[List[String]] = name.*
-
   def run(text: String):ParseResult[List[String]] = parse(names, text)
-
 }
