@@ -14,6 +14,10 @@ object Main {
       ("bar", Item("monitor", Map("rule" -> "none"))),
       ("foo", Item("report2", Map("report-name" -> "Common", "user" -> "admin")))
     )
+    val testInput1 = "a bc defg"
+    val testInput2 = "ltm node /Common/SL00300 {"
+    println(Parser.run(testInput1))
+    println(Parser.run(testInput2))
     println(input)
     val outputData = Section.groupItems(inputData)
     println(outputData)
