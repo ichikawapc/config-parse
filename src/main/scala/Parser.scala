@@ -11,4 +11,11 @@ object Parser extends RegexParsers {
   def name: Regex =  """[0-9a-zA-Z/:-_.,]+""".r
   def names: Parser[List[String]] = name.*
   def run(text: String):ParseResult[List[String]] = parse(names, text)
+  def item : Parser[(String, Item)] = for {
+    ns <- names <~ whiteSpace <~ elem('{') <~ "\n"
+    conts <- (Section.sectionItems <~ "\n").*
+    _ <- elem('}')
+  } yield {
+    (ns, conts)
+  }
 }
