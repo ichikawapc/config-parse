@@ -8,14 +8,21 @@ import scala.util.matching.Regex
 
 object Parser extends RegexParsers {
   override def skipWhitespace = true
-  def name: Regex =  """[0-9a-zA-Z/:-_.,]+""".r
-  def names: Parser[List[String]] = name.*
-  def run(text: String):ParseResult[List[String]] = parse(names, text)
+  def name : Regex =  """[0-9a-zA-Z/:-_.,]+""".r    //英数字記号の文字列を抽出
+  def names : Parser[List[String]] = name.*         //nameをリスト化
+  def run(text: String) : ParseResult[List[String]] = parse(names, text)  //textに対してnamesを実行
+  def simpleContent : Parser[(String, String)] = for {
+    user <- names <~ whiteSpace
+    content <- names <~ "\n"
+  }   //fieldとcontentがシンプルに対になってる
+  def blockContent : Parser[(String, String)] = ???      //contentが{}で囲まれてる
+  def content : Parser[String] = simpleContent | blockContent
+  /*def field : Parser[(String, String)]    //天才が作るやつ
   def item : Parser[(String, Item)] = for {
-    ns <- names <~ whiteSpace <~ elem('{') <~ "\n"
-    conts <- (Section.sectionItems <~ "\n").*
+    ns <- names <~ elem('{') <~ "\n"
+    fs <- (field <~ "\n").*
     _ <- elem('}')
   } yield {
-    (ns, conts)
-  }
+    (ns, fs)
+  }*/
 }
