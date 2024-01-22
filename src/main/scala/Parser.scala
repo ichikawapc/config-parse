@@ -12,13 +12,17 @@ object Parser extends RegexParsers {
   def names : Parser[List[String]] = name.*         //nameをリスト化
   def run(text: String) : ParseResult[List[String]] = parse(names, text)  //textに対してnamesを実行
   def simpleContent : Parser[(String, String)] = for {
-    user <- names <~ whiteSpace
+    field <- names <~ whiteSpace
     content <- names <~ "\n"
-  }   //fieldとcontentがシンプルに対になってる
-  def blockContent : Parser[(String, String)] = ???      //contentが{}で囲まれてる
-  def content : Parser[String] = simpleContent | blockContent
-  /*def field : Parser[(String, String)]    //天才が作るやつ
-  def item : Parser[(String, Item)] = for {
+    _ <- elem('}')
+  } yield (field, content)  //fieldとcontentがシンプルに対になってる
+  def blockContent : Parser[(String, String)] = for {
+    field <- names <~ elem('{') <~ "\n"
+    content <- names <~ "\n"
+    _ <- elem('}')
+  } yield (field, content)    //contentが{}で囲まれてる
+  def content : Parser[(String, String)] = simpleContent | blockContent
+  /*def item : Parser[(String, Item)] = for {
     ns <- names <~ elem('{') <~ "\n"
     fs <- (field <~ "\n").*
     _ <- elem('}')
