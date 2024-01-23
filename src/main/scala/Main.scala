@@ -21,6 +21,9 @@ object Main {
     println(input)
     val outputData = Section.groupItems(inputData)
     println(outputData)
+    val testParser1 = "user /Common/admin"
+    val runTestParser1 = Parser.run(testInput1)
+    println(Parser.content(runTestParser1))
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
       println("使用例: sbt \"run sample/input/bigip.conf\"")
