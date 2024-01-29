@@ -9,21 +9,23 @@ import scala.util.Try
 object Main {
   def main(args:Array[String]): Unit = {
     val input = "Hello World"
+    println(input)
+
     val inputData = List(
       ("foo", Item("default", Map("report-name" -> "Summary"))),
       ("bar", Item("monitor", Map("rule" -> "none"))),
       ("foo", Item("report2", Map("report-name" -> "Common", "user" -> "admin")))
     )
-    val testInput1 = "a bc defg"
-    val testInput2 = "ltm node /Common/SL00300 {"
-    println(Parser.run(testInput1))
-    println(Parser.run(testInput2))
-    println(input)
     val outputData = Section.groupItems(inputData)
     println(outputData)
-    val testParser1 = "user /Common/admin"
-    val runTestParser1 = Parser.run(testInput1)
-    println(Parser.content(runTestParser1))
+
+    val testInput1 = "a bc defg"
+    val testInput2 = "ltm node /Common/SL00300 {"
+    val testRun = Parser.run(testInput2)
+    println(testRun)
+    val testContent = Parser.content(testRun)
+    println(testContent)
+
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
       println("使用例: sbt \"run sample/input/bigip.conf\"")
