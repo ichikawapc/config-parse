@@ -23,8 +23,8 @@ object Main {
     val testInput2 = "ltm node /Common/SL00300 {"
     val testRun = Parser.run(testInput2)
     println(testRun)
-    val testContent = Parser.content(testRun)
-    println(testContent)
+   // val testContent = Parser.content(testRun)
+    //println(testContent)
 
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
