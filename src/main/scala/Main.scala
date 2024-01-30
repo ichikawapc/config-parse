@@ -20,11 +20,9 @@ object Main {
     println(outputData)
 
     val testInput1 = "a bc defg"
-    val testInput2 = "ltm node /Common/SL00300 {"
-    val testRun = Parser.run(testInput2)
-    println(testRun)
-   // val testContent = Parser.content(testRun)
-    //println(testContent)
+    //val testInput2 = "ltm node /Common/SL00300 {"
+    //val testRun = Parser.run(testInput2)
+    val testParserContent = Parser.content(testInput1)
 
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
