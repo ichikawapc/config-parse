@@ -11,16 +11,20 @@ object Parser extends RegexParsers {
   def name : Regex =  """[0-9a-zA-Z/:-_.,]+""".r    //英数字記号の文字列を抽出
   def names : Parser[List[String]] = name.*         //nameをリスト化
   def run(text: String) : ParseResult[List[String]] = parse(names, text)  //textに対してnamesを実行。ParserResult[List[String]]型で返す
-  def simpleContent : Parser[(List[String], List[String])] = for {
+
+  def simpleContent : Parser[String] = for {
     field <- names <~ whiteSpace
     content <- names <~ "\n"
-  } yield (field, List(content))  //fieldとcontentがシンプルに対になってる
-  def blockContent : Parser[(List[String], List[String])] = for {
+  } yield content.mkString  //fieldとcontentがシンプルに対になってる
+
+  def blockContent : Parser[String] = for {
     field <- names <~ elem('{') <~ "\n"
-    content <- (names <~ "\n").*
+    content <- (names  <~ "\n").*
     _ <- elem('}')
-  } yield (field, content)    //contentが{}で囲まれてる
-  def content : Parser[(List[String], List[String])] = simpleContent | blockContent
+  } yield content.mkString   //contentが{}で囲まれてる
+
+  def content : Parser[String] = simpleContent | blockContent
+
   /*def item : Parser[(String, Item)] = for {
     ns <- names <~ elem('{') <~ "\n"
     fs <- (field <~ "\n").*
