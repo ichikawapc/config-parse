@@ -1,4 +1,5 @@
 import scala.util.Try
+import scala.util.parsing.input.CharSequenceReader
 /*　
 ●参考にしたサイト↓
 ファイルの出力：http://www.mwsoft.jp/programming/scala/fileread.html
@@ -19,10 +20,14 @@ object Main {
     val outputData = Section.groupItems(inputData)
     println(outputData)
 
-    val testInput1 = "a bc defg"
+    //val testInput1 = "a bc defg"
     //val testInput2 = "ltm node /Common/SL00300 {"
+    val testInput3 = "availability-zone {\n" +
+      "valid-values { a b c d }\n" +
+      "}"
     //val testRun = Parser.run(testInput2)
-    val testParserContent = Parser.content(testInput1)
+    val testParserContent = Parser.content(new CharSequenceReader(testInput3))
+    println(testParserContent)
 
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
