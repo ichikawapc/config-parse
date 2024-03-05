@@ -1,24 +1,41 @@
 case class Item(name: String, contents: Map[String, String]) {
   // nameとcontentsの定義とゲッターまで設定済み
   def toCsvRow(fieldNames: List[String]): List[String] = {
-    // fieldNamesのリストの中身を定義(リストの中身は例え)
-    // fieldNames = リストの項目名
+    // fieldNames = リストの項目名⇒既に設定済みと考えてOK
     // fieldNames = List("name", "address", "others");
     // fieldNamesリストの中身と同じkeyを持つvalueをcontentsから取り出す(⇒for文にする?)
     def pickValue(field: String) = {
-      // Option[String]型にする
-      // for文(リスト内のcontentsの数だけ繰り返す)
-      for (i = 0, i <field.length, i++) {
-        val x = contents.get(field: String)
-        // Option[String]型からString型へ変換
-        Option.getOrElse(x)
-        x match {
-          case Some(fieldNames) => // fieldNamesのリストに格納したい
-          case None             => null // スキップする(or空欄にしておく?)
+      // fieldNamesリストの項目を変数fと定義⇒1項目ずつ代入してcontentsマップから取り出す
+      fieldNames.map(f => getContents(f)) {
+        if (fieldName == f) {
+          // fieldNamesリストにfの項目があるか→fieldNamesリストのkeyをfieldNameと定義(定義方法が分からず)
+          contents.get(f).getUnsafe;
+        } else {
+          return "";
         }
       }
     }
-    // fieldNamesからcontentsの項目をリストに格納
-    fieldNames.map(field => pickValue(field))
   }
 }
+
+// def getContents(f)の定義
+// def getContents(f) {
+// if (ある時) {
+//  contents.get(f).getUnsafe; getUnsafeは破綻する可能性有⇒パターンマッチなら絶対破綻しない
+// } else {
+//  return "";
+// }
+// }
+
+// fieldNames.map(f => getContents(f))
+// ↑fieldNamesのValueを1つずつ取ってきて、それぞれをgetContents(f)に変換してくれる(for文から関数へ値を渡すところまで融合)
+
+// パターンマッチ(Javaのswitch文に相当)
+// contents.get(f) match {
+// case Some(x) => x　←左辺と右辺のxは揃える
+// case None => ""
+// }
+
+// ↓
+// パターンマッチの1行化(Option型の時のみ有効)
+// contents.get(f).getOrElse("") ←最後の()にはNoneで返す値
