@@ -7,7 +7,7 @@ case class Item(name: String, contents: Map[String, String]) {
     def pickValue(field: String) = {
       // fieldNamesリストの項目を変数fと定義⇒1項目ずつ代入してcontentsマップから取り出す
       fieldNames.map(f => getContents(f)) {
-        if (fieldName == f) {
+        if (map.contains(f)) {
           // fieldNamesリストにfの項目があるか→fieldNamesリストのkeyをfieldNameと定義(定義方法が分からず)
           contents.get(f).getUnsafe;
         } else {
