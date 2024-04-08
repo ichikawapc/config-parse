@@ -24,10 +24,13 @@ object Main {
     //val testInput2 = "ltm node /Common/SL00300 {"
     val testInput3 =
     """
-      default-report {\n    report-name sessionReports/sessionSummary\n    user /Common/admin\n}""".stripMargin
+      apm report default-report {
+    report-name sessionReports/sessionSummary
+    user /Common/admin
+}""".stripMargin
     //val testRun = Parser.run(testInput2)
     //val testParserContent = Parser.content(new CharSequenceReader(testInput3))
-    val testParserContent = Parser.parse(Parser.content, testInput3)
+    val testParserContent = Parser.content(new CharSequenceReader(testInput3))
     println(testParserContent)
 
     if(args.length == 0) {
