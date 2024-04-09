@@ -20,18 +20,17 @@ object Main {
     val outputData = Section.groupItems(inputData)
     println(outputData)
 
-    //val testInput1 = "a bc defg"
-    //val testInput2 = "ltm node /Common/SL00300 {"
-    val testInput3 =
-    """
-      apm report default-report {
-    report-name sessionReports/sessionSummary
-    user /Common/admin
+    val testInput1 = "user /Common/admin"
+    val testInput2 =
+      """
+     availability-zone {
+            valid-values { a b c d }
+      }
 }""".stripMargin
-    //val testRun = Parser.run(testInput2)
-    //val testParserContent = Parser.content(new CharSequenceReader(testInput3))
-    val testParserContent = Parser.content(new CharSequenceReader(testInput3))
-    println(testParserContent)
+    val testSimpleContent = Parser.content(new CharSequenceReader(testInput1))
+    val testBlockContent = Parser.content(new CharSequenceReader(testInput2))
+    println(testSimpleContent)
+    println(testBlockContent)
 
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
