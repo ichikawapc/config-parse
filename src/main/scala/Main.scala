@@ -22,13 +22,15 @@ object Main {
 
     val testInput1 = "user /Common/admin"
     val testInput2 =
-      """
-     availability-zone {
-            valid-values { a b c d }
-      }
-}""".stripMargin
-    val testSimpleContent = Parser.content(new CharSequenceReader(testInput1))
-    val testBlockContent = Parser.content(new CharSequenceReader(testInput2))
+      """availability-zone {
+      valid-values { a b c d }
+      }""".stripMargin
+
+    val testSimpleContent = Parser.parse(Parser.content, testInput1)
+    val testBlockContent = Parser.parse(Parser.content, testInput2)
+
+    //val testSimpleContent = Parser.content(new CharSequenceReader(testInput1))
+    //val testBlockContent = Parser.content(new CharSequenceReader(testInput2))
     println(testSimpleContent)
     println(testBlockContent)
 
