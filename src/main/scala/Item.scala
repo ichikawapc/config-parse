@@ -6,15 +6,17 @@ case class Item(name: String, contents: Map[String, String]) {
     // fieldNamesリストの中身と同じkeyを持つvalueをcontentsから取り出す(⇒for文にする?)
     def pickValue(field: String) = {
       // fieldNamesリストの項目を変数fと定義⇒1項目ずつ代入してcontentsマップから取り出す
-      fieldNames.map(f => getContents(f)) {
-        if (map.contains(f)) {
-          // fieldNamesリストにfの項目があるか→fieldNamesリストのkeyをfieldNameと定義(定義方法が分からず)
-          contents.get(f).getUnsafe;
-        } else {
-          return "";
-        }
+      if (contents.contains(f)) {
+        // fieldNamesリストにfの項目があるか→fieldNamesリストのkeyをfieldNameと定義(定義方法が分からず)
+        contents.get(f).getUnsafe;
+      } else {
+        // return "";
+        "";
       }
     }
+
+    val values = fieldNames.map(field=>pickValue(field))
+    // 上の変数valuesで引き出してきたvalueをcsvとして当てはめる式を考える。
   }
 }
 
