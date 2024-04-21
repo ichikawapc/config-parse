@@ -24,8 +24,8 @@ object Main {
     val testInput1 = "user /Common/admin"
     val testInput2 =
       """availability-zone {
-      valid-values
-      }""".stripMargin
+            valid-values { a b c d }
+        }"""
 
     Parser.parse(Parser.content, testInput2) match {
       case Parser.Success(r, _next) => println(r)
