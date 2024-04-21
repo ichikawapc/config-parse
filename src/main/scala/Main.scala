@@ -1,5 +1,6 @@
-import scala.util.Try
-import scala.util.parsing.input.CharSequenceReader
+//import scala.util.{Failure, Success}
+//import scala.util.parsing.combinator.Parsers
+
 /*　
 ●参考にしたサイト↓
 ファイルの出力：http://www.mwsoft.jp/programming/scala/fileread.html
@@ -23,16 +24,13 @@ object Main {
     val testInput1 = "user /Common/admin"
     val testInput2 =
       """availability-zone {
-      valid-values { a b c d }
+      valid-values
       }""".stripMargin
 
-    val testSimpleContent = Parser.parse(Parser.content, testInput1)
-    val testBlockContent = Parser.parse(Parser.content, testInput2)
-
-    //val testSimpleContent = Parser.content(new CharSequenceReader(testInput1))
-    //val testBlockContent = Parser.content(new CharSequenceReader(testInput2))
-    println(testSimpleContent)
-    println(testBlockContent)
+    Parser.parse(Parser.content, testInput2) match {
+      case Parser.Success(r, _next) => println(r)
+      case Parser.Failure(e, _next) => println(s"残念: ${e.toString()}")
+    }
 
     if(args.length == 0) {
       println("コマンドライン引数を与えて使ってね♡")
