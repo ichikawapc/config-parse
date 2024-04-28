@@ -21,15 +21,20 @@ object Main {
     val outputData = Section.groupItems(inputData)
     println(outputData)
 
-    val testInput1 = "user /Common/admin"
+    val testInput1 = """user /Common/admin"""
     val testInput2 =
-      """availability-zone {
-            valid-values { a b c d }
-        }"""
-
-    Parser.parse(Parser.content, testInput2) match {
+      """default-report {
+    report-name sessionReports/sessionSummary
+    }"""
+    Parser.parse(Parser.field, testInput1) match {
       case Parser.Success(r, _next) => println(r)
       case Parser.Failure(e, _next) => println(s"残念: ${e.toString()}")
+      case Parser.Error(e, _next) => println(s"エラー: ${e.toString()}")
+    }
+    Parser.parse(Parser.field, testInput2) match {
+      case Parser.Success(r, _next) => println(r)
+      case Parser.Failure(e, _next) => println(s"残念: ${e.toString()}")
+      case Parser.Error(e, _next) => println(s"エラー: ${e.toString()}")
     }
 
     if(args.length == 0) {
