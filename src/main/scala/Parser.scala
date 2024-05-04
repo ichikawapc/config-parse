@@ -14,12 +14,12 @@ object Parser extends RegexParsers { //RegexParsersトレイトを継承した�
   def run(text: String): ParseResult[List[String]] = parse(names, text) //textに対してnamesを実行。ParserResult[List[String]]型で返す。ParserResult[A]は、パーサによって処理された入力に対する結果を格納し、パースが成功したかどうか、失敗したかどうか、エラーが発生したかどうかを示す。
   def content: Parser[String] = simpleContent | blockContent
   def field: Parser[String] = name ~> content
-    def simpleContent: Parser[String] = for {
-      content <- name
-    } yield content
-    def blockContent: Parser[String] = for {
-      _ <- literal("{")
-      content <- field.* //<~ eol
-      _ <- literal("}")
-    } yield content.mkString(" ")
+  def simpleContent: Parser[String] = for {
+    content <- name
+  } yield content
+  def blockContent: Parser[String] = for {
+    _ <- literal("{")
+    content <- field.* //<~ eol
+    _ <- literal("}")
+  } yield content.mkString(" ")
 }
