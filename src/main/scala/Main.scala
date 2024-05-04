@@ -25,6 +25,7 @@ object Main {
     val testInput2 =
       """default-report {
     report-name sessionReports/sessionSummary
+    user /Common/admin
     }"""
     Parser.parse(Parser.field, testInput1) match {
       case Parser.Success(r, _next) => println(r)
