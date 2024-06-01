@@ -13,6 +13,17 @@ object Main {
     val input = "Hello World"
     println(input)
 
+    val testItemInput ="""apm report default-report {
+                         |    report-name sessionReports/sessionSummary
+                         |    user /Common/admin
+                         |}""".stripMargin
+
+    Parser.parse(Parser.item, testItemInput) match {
+      case Parser.Success(r, _next) => println(r)
+      case Parser.Failure(e, _next) => println(s"残念: ${e.toString()}")
+      case Parser.Error(e, _next) => println(s"エラー: ${e.toString()}")
+    }
+    /*
     val inputData = List(
       ("foo", Item("default", Map("report-name" -> "Summary"))),
       ("bar", Item("monitor", Map("rule" -> "none"))),
@@ -53,6 +64,6 @@ object Main {
         case e: java.io.FileNotFoundException =>  //「java.io.FileNotFoundException」というエラーコードをキャッチ
           println(s"$filename は存在しません")
       }
-    }
+    }*/
   }
 }
