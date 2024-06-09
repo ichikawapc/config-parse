@@ -5,7 +5,7 @@
 
 import scala.util.parsing.combinator._  //パーサコンビネーターライブラリを使用するためのimport文
 import scala.util.matching.Regex  //正規表現を使用するためのimport文
-
+import scala.io.Source
 object Parser extends RegexParsers { //RegexParsersトレイトを継承したオブジェクト(Parser)を作成
   override def skipWhitespace = true //スペースをスキップ
   def eol = "\n"
@@ -37,5 +37,11 @@ object Parser extends RegexParsers { //RegexParsersトレイトを継承した�
     val secName = ns.dropRight(1).mkString(" ")
     val itemName = ns.last
     (secName, Item(itemName, fields.toMap))
+  }
+  def items: Parser[List[(String, Item)]] = item.*
+  def readFile(filename: String) = {
+    val source = Source.fromFile(filename)
+    val sourceContent = source.mkString
+    parse(items, sourceContent)
   }
 }

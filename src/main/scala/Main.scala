@@ -13,6 +13,19 @@ object Main {
     val input = "Hello World"
     println(input)
 
+    if(args.length == 0) {
+      println(
+        """コマンドライン引数を与えて使ってね♡
+          |使用例: sbt \"run sample/input/bigip.conf\
+          |""".stripMargin)
+    } else {
+      val filename = (args(0))
+      val result = Parser.readFile(filename)
+      println(result)
+    }
+
+
+    /*
     val testItemInput ="""apm report default-report {
                          |    report-name sessionReports/sessionSummary
                          |    user /Common/admin
@@ -23,7 +36,6 @@ object Main {
       case Parser.Failure(e, _next) => println(s"残念: ${e.toString()}")
       case Parser.Error(e, _next) => println(s"エラー: ${e.toString()}")
     }
-    /*
     val inputData = List(
       ("foo", Item("default", Map("report-name" -> "Summary"))),
       ("bar", Item("monitor", Map("rule" -> "none"))),
