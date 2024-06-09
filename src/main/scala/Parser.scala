@@ -41,7 +41,7 @@ object Parser extends RegexParsers { //RegexParsersトレイトを継承した�
   def items: Parser[List[(String, Item)]] = item.*
   def readFile(filename: String) = {
     val source = Source.fromFile(filename)
-    val sourceContent = source.mkString
-    parse(items, sourceContent)
+    val sourceContent = source.reader()
+    parseAll(items, sourceContent)
   }
 }
