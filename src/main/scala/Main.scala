@@ -9,6 +9,11 @@
 例外処理２：http://www.nct9.ne.jp/m_hiroi/java/scala12.html
  */
 object Main {
+
+  def fileName (sectionName : String) = {
+    sectionName.replace(" ", "_") + ".csv"
+  }
+
   def main(args:Array[String]): Unit = {
     val input = "Hello World"
     println(input)
@@ -16,12 +21,25 @@ object Main {
     if(args.length == 0) {
       println(
         """コマンドライン引数を与えて使ってね♡
-          |使用例: sbt \"run sample/input/bigip.conf\
+          |使用例: sbt "run sample/input/bigip.conf
           |""".stripMargin)
     } else {
       val filename = (args(0))
-      val result = Parser.readFile(filename)
-      println(result)
+      Parser.readFile(filename) match {
+        case Parser.Success(name_items, _) =>
+          val sections = Section.groupItems(name_items)
+          sections.foreach {sec =>
+            sec.saveFile(fileName(sec.name))
+          }
+          val y = sections.map(_.toTable)
+          println(y)
+        case Parser.Error(message, next) =>
+          println("ERROR: " +message)
+          println(next)
+        case Parser.Failure(message, next) =>
+          println("Failure: " +message)
+          println("  position: " + next.pos)
+      }
     }
 
 
