@@ -29,10 +29,10 @@ object Main {
         case Parser.Success(name_items, _) =>
           val sections = Section.groupItems(name_items)
           sections.foreach {sec =>
-            sec.saveFile(fileName(sec.name))
+            val filename = fileName(sec.name)
+            sec.saveFile(filename)
+            println(s"CSVファイルを作成しました: $filename")
           }
-          val y = sections.map(_.toTable)
-          println(y)
         case Parser.Error(message, next) =>
           println("ERROR: " +message)
           println(next)
