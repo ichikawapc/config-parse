@@ -12,7 +12,9 @@ object Parser extends RegexParsers { //RegexParsersトレイトを継承した�
   def name: Regex = """[0-9a-zA-Z/:_.,-]+""".r //英数字記号の文字列を抽出
   def names: Parser[List[String]] = name.* //nameをリスト化（Parser[A] は、A 型の値を解析するためのパーサ）
   def run(text: String): ParseResult[List[String]] = parse(names, text) //textに対してnamesを実行。ParserResult[List[String]]型で返す。ParserResult[A]は、パーサによって処理された入力に対する結果を格納し、パースが成功したかどうか、失敗したかどうか、エラーが発生したかどうかを示す。
-  def content: Parser[String] = simpleContent | blockContent
+  def content: Parser[String] = simpleContent | blockContent | quotedContent
+
+  def quotedContent: Parser[String] = "\"" ~> "[^\"]+".r <~ "\""
 
   //def field: Parser[String] = name ~> content
   def simpleContent: Parser[String] = for {
