@@ -7,7 +7,8 @@ import scala.util.parsing.combinator._  //パーサコンビネーターライ�
 import scala.util.matching.Regex  //正規表現を使用するためのimport文
 import scala.io.Source
 object Parser extends RegexParsers { //RegexParsersトレイトを継承したオブジェクト(Parser)を作成
-  override def skipWhitespace = true //スペースをスキップ
+  //override def skipWhitespace = true //スペースをスキップ
+  override val whiteSpace = """[ \t\r\f]+""".r
   def eol = "\n"
   def name: Regex = """[0-9a-zA-Z/:_.,-]+""".r //英数字記号の文字列を抽出
   def names: Parser[List[String]] = name.* //nameをリスト化（Parser[A] は、A 型の値を解析するためのパーサ）
@@ -21,19 +22,28 @@ object Parser extends RegexParsers { //RegexParsersトレイトを継承した�
     content <- name
   } yield content
 
-  def blockContent: Parser[String] = for {
+  def blockContent: Parser[String] =
+    blockFields | blockWords
+
+  def blockFields: Parser[String] = for {
+    _ <- literal("{") <~ opt(eol) //eolがあってもなくても良いようにする
+    content <- field.*
+    _ <- opt(eol) ~> literal("}")
+  } yield content.map { case (k, v) => s"$k $v" }.mkString(" ") // keyとValueを"key value"のString型にする
+
+  def blockWords: Parser[String] = for {
     _ <- literal("{")
-    content <- field.* //<~ eol
+    words <- name.*
     _ <- literal("}")
-  } yield content.mkString(" ")
+  } yield words.mkString
 
   def field : Parser[(String, String)] = for {
-    (x ~ y) <- name ~ content //<~ eol
+    (x ~ y) <- name ~ content <~ opt(eol)
   } yield (x, y)
 
   def item: Parser[(String, Item)] = for {
-    ns <- names <~ literal("{") //<~ eol
-    fields: List[(String, String)] <- field.*
+    ns <- names <~ literal("{") <~ eol
+    fields: List[(String, String)] <- field.* //<~ eol
     _ <- literal("}")
   } yield {
     val secName = ns.dropRight(1).mkString(" ")
